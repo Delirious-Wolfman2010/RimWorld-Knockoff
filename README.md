@@ -11,3 +11,8 @@ main.cpp \
 stb_image_write.h \
 play.command \
 game(executable)
+\
+\
+\
+to play the game, just run the play.command file. \
+thanks for playing
