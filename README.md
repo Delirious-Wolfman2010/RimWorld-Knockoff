@@ -1,3 +1,6 @@
+Everything should be ready to run, just open up the C++ folder, and double click the play.command file. If that doesn't work, try double clicking on the game executable, though that is less stable.
+\
+\
 You should put: \
 output.ppm \
 perlin_noise.png \
