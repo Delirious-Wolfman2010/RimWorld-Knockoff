@@ -182,7 +182,7 @@ static bool DrawTex(const std::string& name, int x, int y, int w, int h, Color t
     auto it = g_tex.find(name);
     if (it == g_tex.end()) {
         if (g_texMissing.count(name)) return false;
-        std::string path = "textures/" + name + ".png";
+        std::string path = "/Users/csullivan/Desktop/cs/C++/textures/" + name + ".png";
         if (!FileExists(path.c_str())) { g_texMissing.insert(name); return false; }
         Texture2D t = LoadTexture(path.c_str());
         if (t.id == 0) { g_texMissing.insert(name); return false; }
@@ -402,10 +402,8 @@ void DrawLocalCell(int px, int py, int size, const LocalCell& cell, float time, 
         DrawRectangle(px, py, size, size, Color{110, 75, 40, 110}); DrawRectangleLines(px, py, size, size, Color{180, 140, 80, 160}); }}
 void DrawPawnIcon(int cx, int cy, Color shirt, const std::string& name, bool isWorking, bool isSleeping, bool isSelected, bool drafted, bool downed, int weapon, float hpFrac) {
     if (isSelected) DrawCircleLines(cx, cy + 2, 14.0f, GOLD);
-    bool lying = isSleeping || downed;
-    bool pt = DrawTex(lying ? "pawn_down_body" : "pawn_body", cx - 16, cy - 16, 32, 32, shirt);
+    bool pt = DrawTex((isSleeping || downed) ? "pawn_down" : "pawn", cx - 16, cy - 16, 32, 32, shirt);
     if (pt) {
-        DrawTex(lying ? "pawn_down_head" : "pawn_head", cx - 16, cy - 16, 32, 32);
         if (drafted) DrawCircleLines(cx, cy + 2, 12.0f, ORANGE);
         if (isWorking) DrawText("*", cx + 8, cy - 14, 16, YELLOW);
     } else if (isSleeping || downed) {
@@ -499,7 +497,7 @@ int main() {
     const int mapBottomY = screenHeight - bottomBarHeight, visibleMapRows = (mapBottomY - topBarHeight) / tileSize;
     const int PX = 100, PY = 90, PW = 1400, PH = 760;
     InitWindow(screenWidth, screenHeight, "RimWorld-Style Colony & World Sim");
-    SetExitKey(KEY_NULL);
+    SetExitKey(KEY_BACKSPACE);
     SetWindowPosition(40, 25);
     SetTargetFPS(60);
     std::random_device rd; std::mt19937 seedRng(rd()); std::uniform_int_distribution<int> seedDist(1000, 999999);
